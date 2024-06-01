@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Model
 {
@@ -14,7 +12,7 @@ namespace Model
                 {
                     string jsonString = r.ReadToEnd();
                     Console.WriteLine("Conteúdo do arquivo JSON:");
-                    Console.WriteLine(jsonString); // Imprime o conteúdo do arquivo JSON
+                    Console.WriteLine(jsonString);
                     var jsonObject = JsonConvert.DeserializeObject<Dictionary<string, List<Radar>>>(jsonString);
 
                     if (jsonObject != null && jsonObject.ContainsKey("radar"))

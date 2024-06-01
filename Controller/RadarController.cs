@@ -48,6 +48,7 @@ namespace Controller
             }
         }
 
+
         public static int getCountRecords(List<Radar> lista) => lista.Count;
     }
 }
