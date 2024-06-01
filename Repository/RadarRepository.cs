@@ -26,7 +26,7 @@ namespace Repository
             {
                 using (SqlConnection conn = new SqlConnection(strConn))
                 {
-                    conn.Open(); // Abre a conexão aqui
+                    conn.Open(); 
                     SqlCommand cmd = new SqlCommand(Radar.INSERT, conn);
 
                     cmd.Parameters.Add(new SqlParameter("@Id", radar.Id));
@@ -40,13 +40,15 @@ namespace Repository
                     cmd.Parameters.Add(new SqlParameter("@TipoPista", radar.TipoPista));
                     cmd.Parameters.Add(new SqlParameter("@Sentido", radar.Sentido));
                     cmd.Parameters.Add(new SqlParameter("@Situacao", radar.Situacao));
-                    cmd.Parameters.Add(new SqlParameter("@DataDaInativacao", radar.DataDaInativacao));
+
+                    string dataDaInativacaoStr = radar.DataDaInativacao != null ? string.Join(",", radar.DataDaInativacao) : null;
+                    cmd.Parameters.Add(new SqlParameter("@DataDaInativacao", dataDaInativacaoStr));
                     cmd.Parameters.Add(new SqlParameter("@Latitude", radar.Latitude));
                     cmd.Parameters.Add(new SqlParameter("@Longitude", radar.Longitude));
                     cmd.Parameters.Add(new SqlParameter("@VelocidadeLeve", radar.VelocidadeLeve));
                     
 
-                    cmd.ExecuteNonQuery(); // Executa a consulta
+                    cmd.ExecuteNonQuery(); 
 
                     return true;
                 }
@@ -77,7 +79,9 @@ namespace Repository
                 cmd.Parameters.Add(new SqlParameter("@TipoPista", radar.TipoPista));
                 cmd.Parameters.Add(new SqlParameter("@Sentido", radar.Sentido));
                 cmd.Parameters.Add(new SqlParameter("@Situacao", radar.Situacao));
-                cmd.Parameters.Add(new SqlParameter("@DataDaInativacao", radar.DataDaInativacao));
+
+                string dataDaInativacaoStr = radar.DataDaInativacao != null ? string.Join(",", radar.DataDaInativacao) : null;
+                cmd.Parameters.Add(new SqlParameter("@DataDaInativacao", dataDaInativacaoStr));
                 cmd.Parameters.Add(new SqlParameter("@Latitude", radar.Latitude));
                 cmd.Parameters.Add(new SqlParameter("@Longitude", radar.Longitude));
                 cmd.Parameters.Add(new SqlParameter("@VelocidadeLeve", radar.VelocidadeLeve));
@@ -143,7 +147,7 @@ namespace Repository
                         TipoPista = reader.GetString(8),
                         Sentido = reader.GetString(9),
                         Situacao = reader.GetString(10),
-                        DataDaInativacao = reader.GetString(11),
+                        DataDaInativacao = reader.GetString(11)?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList(),
                         Latitude = reader.GetString(12),
                         Longitude = reader.GetString(13),
                         VelocidadeLeve = reader.GetString(14)
@@ -191,7 +195,7 @@ namespace Repository
                         TipoPista = reader.GetString(8),
                         Sentido = reader.GetString(9),
                         Situacao = reader.GetString(10),
-                        DataDaInativacao = reader.GetString(11),
+                        DataDaInativacao = reader.GetString(11)?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList(),
                         Latitude = reader.GetString(12),
                         Longitude = reader.GetString(13),
                         VelocidadeLeve = reader.GetString(14)

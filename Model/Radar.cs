@@ -11,7 +11,7 @@ namespace Model
         public static readonly string GETALL = "SELECT Id, Concessionaria, AnoDoPnvSnv, TipoDeRadar, Rodovia, Uf, KmM, Municipio, TipoPista, Sentido, Situacao, DataDaInativacao, Latitude, Longitude, VelocidadeLeve FROM Radar";
         public static readonly string GET = "SELECT Id, Concessionaria, AnoDoPnvSnv, TipoDeRadar, Rodovia, Uf, KmM, Municipio, TipoPista, Sentido, Situacao, DataDaInativacao, Latitude, Longitude, VelocidadeLeve FROM Radar WHERE Id = @Id";
 
-        
+
         public int Id { get; set; }
 
         [JsonProperty("concessionaria")]
@@ -45,7 +45,7 @@ namespace Model
         public string Situacao { get; set; }
 
         [JsonProperty("data_da_inativacao")]
-        public object DataDaInativacao { get; set; }
+        public List<string> DataDaInativacao { get; set; }
 
         [JsonProperty("latitude")]
         public string Latitude { get; set; }
@@ -55,6 +55,8 @@ namespace Model
 
         [JsonProperty("velocidade_leve")]
         public string VelocidadeLeve { get; set; }
+        public string DataDaInativacaoString => DataDaInativacao != null ? string.Join(",", DataDaInativacao) : null;
+
 
         public override string ToString()
         {

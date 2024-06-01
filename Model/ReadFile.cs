@@ -15,9 +15,12 @@ namespace Model
                     string jsonString = r.ReadToEnd();
                     Console.WriteLine("Conteúdo do arquivo JSON:");
                     Console.WriteLine(jsonString); // Imprime o conteúdo do arquivo JSON
-                    var objetoGeral = JsonConvert.DeserializeObject<Radares>(jsonString);
+                    var jsonObject = JsonConvert.DeserializeObject<Dictionary<string, List<Radar>>>(jsonString);
 
-                    if (objetoGeral != null) return objetoGeral.registros;
+                    if (jsonObject != null && jsonObject.ContainsKey("radar"))
+                    {
+                        return jsonObject["radar"];
+                    }
                 }
             }
             catch (Exception ex)
